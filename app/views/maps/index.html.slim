@@ -25,3 +25,12 @@ h1 地図
   input#zyusyoattitude.form-control[
     type="text"
   ]
+
+container.text-center
+  .row
+    -(0..11).each do |i|
+      .col-1 id = "time-#{i}"
+  .row
+    -(0..11).each do |i|
+      .col-1 id = "weather-#{i}"
+  

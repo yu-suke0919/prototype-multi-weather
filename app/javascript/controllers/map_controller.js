@@ -36,13 +36,30 @@ export default class extends Controller {
       .bindPopup("東京駅")
 
     var popup = L.popup();
-    function onMapClick(e){
+
+    var lat = 0;
+    var lng = 0;
+    async function onMapClick(e){
       popup
         .setLatLng(e.latlng)
         .setContent("You clicked the map at " + e.latlng.toString())
         .openOn(e.target);
       document.getElementById('idoattitude').value = e.latlng.lat
       document.getElementById('keidoattitude').value = e.latlng.lng
+      try{
+        var url = `https://api.open-meteo.com/v1/forecast?latitude=${e.latlng.lat}&longitude=${e.latlng.lng}&hourly=precipitation_probability&timezone=Asia%2FTokyo`;
+        var res = await fetch(url);
+        var data = await res.json();
+        console.log(data);
+        let d = new Date();
+        let currentHour = d.getHours();
+        for(let i = 0;i < 12;i++){
+          document.getElementById('time-'+i).textContent = i+currentHour + '時'
+          document.getElementById('weather-'+i).textContent = data.hourly.precipitation_probability[i+currentHour] + '%';
+        }
+
+      }
+      catch(e){}
     }
     this.map.on('click', onMapClick);
   }
