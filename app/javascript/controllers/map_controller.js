@@ -1,4 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
+import { MUNI_ARRAY } from "municipalities"
 import * as L from "leaflet"
 
 export default class extends Controller {
@@ -57,6 +58,15 @@ export default class extends Controller {
           document.getElementById('time-'+i).textContent = i+currentHour + '時'
           document.getElementById('weather-'+i).textContent = data.hourly.precipitation_probability[i+currentHour] + '%';
         }
+      }
+      catch(e){}
+      try{
+        var url = `https://mreversegeocoder.gsi.go.jp/reverse-geocoder/LonLatToAddress?lat=${e.latlng.lat}&lon=${e.latlng.lng}`;
+        var res = await fetch(url);
+        var data = await res.json();
+        let muniArray = MUNI_ARRAY[data.results.muniCd].split(',')
+        let address = muniArray[1]+muniArray[3]+data.results.lv01Nm
+        document.getElementById('addressttitude').value = address;
 
       }
       catch(e){}
