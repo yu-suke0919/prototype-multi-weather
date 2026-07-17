@@ -32,9 +32,6 @@ export default class extends Controller {
       }
     ).addTo(this.map)
 
-    L.marker(position)
-      .addTo(this.map)
-      .bindPopup("東京駅")
 
     var popup = L.popup();
 
