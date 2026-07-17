@@ -34,6 +34,17 @@ export default class extends Controller {
     L.marker(position)
       .addTo(this.map)
       .bindPopup("東京駅")
+
+    var popup = L.popup();
+    function onMapClick(e){
+      popup
+        .setLatLng(e.latlng)
+        .setContent("You clicked the map at " + e.latlng.toString())
+        .openOn(e.target);
+      document.getElementById('idoattitude').value = e.latlng.lat
+      document.getElementById('keidoattitude').value = e.latlng.lng
+    }
+    this.map.on('click', onMapClick);
   }
 
   disconnect() {
