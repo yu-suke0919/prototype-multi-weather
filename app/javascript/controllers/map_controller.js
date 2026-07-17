@@ -45,8 +45,8 @@ export default class extends Controller {
         .setLatLng(e.latlng)
         .setContent("You clicked the map at " + e.latlng.toString())
         .openOn(e.target);
-      document.getElementById('idoattitude').value = e.latlng.lat
-      document.getElementById('keidoattitude').value = e.latlng.lng
+      document.getElementById('idoattitude').textContent = e.latlng.lat.toFixed(6)
+      document.getElementById('keidoattitude').textContent = e.latlng.lng.toFixed(6)
       try{
         var url = `https://api.open-meteo.com/v1/forecast?latitude=${e.latlng.lat}&longitude=${e.latlng.lng}&hourly=precipitation_probability&timezone=Asia%2FTokyo`;
         var res = await fetch(url);
@@ -66,7 +66,7 @@ export default class extends Controller {
         var data = await res.json();
         let muniArray = MUNI_ARRAY[data.results.muniCd].split(',')
         let address = muniArray[1]+muniArray[3]+data.results.lv01Nm
-        document.getElementById('addressttitude').value = address;
+        document.getElementById('addressttitude').textContent = address;
 
       }
       catch(e){}

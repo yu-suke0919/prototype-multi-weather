@@ -7,24 +7,16 @@ h1 地図
   data-map-zoom-value="13"
 ]
 
-.input-group
-  span.input-group-text#ido
-    | 緯度
-  input#idoattitude.form-control[
-    type="number"
-  ]
-.input-group
-  span.input-group-text#keido
-    | 経度
-  input#keidoattitude.form-control[
-    type="number"
-  ]
-.input-group
-  span.input-group-text#address
-    | 住所
-  input#addressttitude.form-control[
-    type="text"
-  ]
+container.text-left
+  .row
+    .col-1 緯度
+    .col-2#idoattitude
+    .col-1 経度
+    .col-2#keidoattitude
+    .col-1 住所
+    .col-5#addressttitude
+
+降水量
 
 container.text-center
   .row
