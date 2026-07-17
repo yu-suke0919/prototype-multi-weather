@@ -1,0 +1,28 @@
+h1 地図
+
+.map[
+  data-controller="map"
+  data-map-latitude-value="35.681236"
+  data-map-longitude-value="139.767125"
+  data-map-zoom-value="13"
+]
+
+container.text-left
+  .row
+    .col-1 緯度
+    .col-2#idoattitude
+    .col-1 経度
+    .col-2#keidoattitude
+    .col-1 住所
+    .col-5#addressattitude
+
+= "降水確率"
+
+container.text-center
+  .row
+    -(0..11).each do |i|
+      .col-1 id = "time-#{i}"
+  .row
+    -(0..11).each do |i|
+      .col-1 id = "weather-#{i}"
+  
