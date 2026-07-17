@@ -41,12 +41,21 @@ export default class extends Controller {
     var lat = 0;
     var lng = 0;
     async function onMapClick(e){
+      document.getElementById('idoattitude').style.color = "silver"
+      document.getElementById('keidoattitude').style.color = "silver"
+      document.getElementById('addressattitude').style.color = "silver"
+      for(let i = 0;i < 12;i++){
+          document.getElementById('time-'+i).style.color = "silver"
+          document.getElementById('weather-'+i).style.color = "silver"
+        }
       popup
         .setLatLng(e.latlng)
         .setContent("You clicked the map at " + e.latlng.toString())
         .openOn(e.target);
       document.getElementById('idoattitude').textContent = e.latlng.lat.toFixed(6)
+      document.getElementById('idoattitude').style.color = "black"
       document.getElementById('keidoattitude').textContent = e.latlng.lng.toFixed(6)
+      document.getElementById('keidoattitude').style.color = "black"
       try{
         var url = `https://api.open-meteo.com/v1/forecast?latitude=${e.latlng.lat}&longitude=${e.latlng.lng}&hourly=precipitation_probability&timezone=Asia%2FTokyo`;
         var res = await fetch(url);
@@ -56,7 +65,9 @@ export default class extends Controller {
         let currentHour = d.getHours();
         for(let i = 0;i < 12;i++){
           document.getElementById('time-'+i).textContent = i+currentHour + '時'
+          document.getElementById('time-'+i).style.color = "black"
           document.getElementById('weather-'+i).textContent = data.hourly.precipitation_probability[i+currentHour] + '%';
+          document.getElementById('weather-'+i).style.color = "black"
         }
       }
       catch(e){}
@@ -66,7 +77,8 @@ export default class extends Controller {
         var data = await res.json();
         let muniArray = MUNI_ARRAY[data.results.muniCd].split(',')
         let address = muniArray[1]+muniArray[3]+data.results.lv01Nm
-        document.getElementById('addressttitude').textContent = address;
+        document.getElementById('addressattitude').textContent = address;
+        document.getElementById('addressattitude').style.color = "black"
 
       }
       catch(e){}
